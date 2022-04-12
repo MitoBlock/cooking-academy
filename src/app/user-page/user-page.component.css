@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.list-title {
+  font-weight: bold;
+}
+
+.btn-danger {
+  padding: 16px;
+  border-radius: 40px;
+  width: 150px;
+  font-size: 20px;
+}
+
+.col-ob {
+  background-color: #F2AA4CFF;
+  color: #101820FF;
+  text-align: center;
+}
+
+.col-bo {
+  background-color: #101820FF;
+  color: #F2AA4CFF;
+  text-align: center;
+}
+
+.col-bo-token {
+  background-color: #101820FF;
+  color: #F2AA4CFF;
+}
+
+.text-danger {
+  font-weight: bold;
+  font-size: 30px;
+  border: 5px solid white;
+  border-radius: 50px;
+  padding: 20px;
+  margin-top: 5px;
+}
+
+.blk-btn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50px;
+  padding: 15px;
+  width: 180px;
+  transition-duration: 0.1s;
+}
+
+.blk-btn:hover {
+  background-color: #36454F;
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, .4);
+}
+
+.user-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 100px;
+  padding-right: 100px;
+  justify-content: center;
+  max-width: 100%;
+  background-image: url('../../assets/images/view2-bg.jpg');
+  background-size: cover;
+  font-size: 20px;
+}
+
+table {
+  table-layout: fixed;
+}
+
+.header {
+  height: 200px;
+  width: 100%;
+}
+
+.logo-container {
+  width: 150px;
+}
+.logo {
+  max-width: 100%;
+}
+
+.user-details {
+	width: 80%;
+	height: 300px;
+	background-color: whitesmoke;
+}
+
+/* handled by bootstrap */
+.card-and-button { 
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.title-author {
+  /* handled with bootstrap */
+}
+
+.card-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card-three-col {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+
+}
+
+.card-container {
+  padding: 10px;
+  height: 100px;
+  outline: 2px solid green;
+  background-color: whitesmoke;
+  width: 500px;
+}
+
+.long-img {
+  /* max-width: 100%; */
+  object-fit: cover;
+  width: 200px;
+  height: 70px;
+}
+.short-img {
+  /* max-width: 100%; */
+  object-fit: cover;
+  width: 120px;
+  height: 70px;
+}
+
+.score-card-and-img {
+  display: grid;
+  padding: 10px;
+  grid-template-columns: 1fr 1fr;
+  background-color: whitesmoke;
+  width: 550px;
+  outline: 2px solid green;
+}
+
+.score-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+
+}
+
+.score-title {
+  font-weight: bold;
+}
+
+.tokenAddress {
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  width: 100px;
+}

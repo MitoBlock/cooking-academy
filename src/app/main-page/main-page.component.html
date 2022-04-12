@@ -1,0 +1,28 @@
+<div class="main-container">
+  <div class="img-container">
+    <img
+      class="main-logo"
+      src="Little Chef-logos.jpeg"
+      alt="logo"
+    />
+  </div>
+
+  <div class="input-container w-25">
+    <form
+      class="d-flex flex-column align-items-center"
+      #userForm="ngForm"
+      (ngSubmit)="onUserAdd(userForm.value)"
+    >
+      <input
+        type="text"
+        class="form-control mb-2"
+        placeholder="Enter Your Name"
+        name="name"
+        [(ngModel)]="addUserName"
+        required
+      />
+      <br />
+      <input type="submit" value="Enter" class="ml-1 btn btn-primary btn-lg blk-btn" />
+    </form>
+  </div>
+</div>
