@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RewardToken } from '../models/reward-token';
 import { User } from '../models/user';
 import { UserService } from '../service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-third-page',
@@ -23,6 +24,9 @@ export class ThirdPageComponent implements OnInit {
   ) {}
 
   handleUsePoints() {
+	
+	Swal.fire("Reward Redeemed", "Have fun cooking!");
+	/*
     for (let token of this.rewardTokens) {
       if (token.activityName == 'Weekly Score') {
         //   "Discount") {
@@ -38,10 +42,14 @@ export class ThirdPageComponent implements OnInit {
         }
       return
       }
-    }
+    } */
   }
 
   handleUseDiscount() {
+	
+	Swal.fire("Reward Redeemed", "Enjoy your class!");
+	
+	/*
     for (let token of this.rewardTokens) {
       if (token.activityName == 'Learn to make tacos') {
         //   "Discount") {
@@ -65,5 +73,9 @@ export class ThirdPageComponent implements OnInit {
       this.accountId = user.account?.id ?? -1;
       this.rewardTokens = user.account?.rewardTokens ?? [];
     });
-  }
+  } */
+}
+
+ngOnInit(): void {}
+
 }
