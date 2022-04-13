@@ -5,17 +5,20 @@ import { RewardToken } from '../models/reward-token';
 import { User } from '../models/user';
 import { UserService } from '../service/user.service';
 import { Balance } from '../models/balance';
+import { BalanceWrapper } from '../models/balance-dto';
 
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css'],
 })
-
 export class UserPageComponent implements OnInit {
-
-  balance : Balance = {denom: "mitocell", amount: "0",};
-  user : User = new User("Bob", "mito1ssl9xlelyk0u93w5x50snxwslcspfq4pdurj34", this.balance )
+  balance: Balance = { denom: 'mitocell', amount: '0' };
+  user: User = new User(
+    'Bob',
+    'mito1ssl9xlelyk0u93w5x50snxwslcspfq4pdurj34',
+    this.balance,
+  );
 
   showTimer = false;
   counter = 5;
@@ -26,9 +29,8 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-
-  //   onKeyChangeScore(event: KeyboardEvent) { 
-  //    this.score = +(event.target as HTMLInputElement).value 
+  //   onKeyChangeScore(event: KeyboardEvent) {
+  //    this.score = +(event.target as HTMLInputElement).value
   // }
 
   // handleMainSubmit() {
@@ -74,7 +76,6 @@ export class UserPageComponent implements OnInit {
   //     },
   //   };
 
-
   //   this.showTimer = true;
   //   let timer = setInterval(() => {
   //     if (this.counter <= 0) {
@@ -115,10 +116,12 @@ export class UserPageComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.userService.getBalance(this.user.account).subscribe((balance : Balance) => {
-      console.log(balance);
-      this.user.balance.denom = balance.denom;
-      this.user.balance.amount = balance.amount;
-    });
+    this.userService
+      .getBalance(this.user.account)
+      .subscribe((balanceDTO: BalanceWrapper) => {
+        const { balance } = balanceDTO;
+        this.user.balance.denom = balance.denom;
+        this.user.balance.amount = balance.amount;
+      });
   }
 }
