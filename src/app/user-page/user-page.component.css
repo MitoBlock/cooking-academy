@@ -6,6 +6,7 @@
 
 .list-title {
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .btn-danger {
@@ -48,6 +49,7 @@
   padding: 15px;
   width: 180px;
   transition-duration: 0.1s;
+  margin: 15px 0 25px 0;
 }
 
 .blk-btn:hover {

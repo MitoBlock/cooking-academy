@@ -12,9 +12,11 @@ import { UserService } from '../service/user.service';
 })
 
 export class UserPageComponent implements OnInit {
+  accountAddress = 'mito444';
+
   name = '';
   score = 0;
-  accountAddress = '';
+  
   rewardTokens: RewardToken[] = [];
   accountId = -1;
   id = -1;
@@ -56,7 +58,7 @@ export class UserPageComponent implements OnInit {
   }
 
   handleOffersClick() {
-    this.router.navigate(['/user', this.id, 'offers']);
+    this.router.navigate(['/user', 'offers']);
   }
 
   handleMakeTacos() {

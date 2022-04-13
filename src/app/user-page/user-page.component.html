@@ -2,7 +2,7 @@
   <header class="header d-flex justify-content-between align-items-center">
     <div class="logo-container">
 
-      <img class="logo" src="logo-grey.PNG" alt="logo" />
+      <img class="logo" src="../../assets/images/LittleChefLogo.jpeg" alt="logo" />
     
     </div>
     <button class="btn btn-danger btn-lg mx-2" (click)="handleOffersClick()">Offers</button>
@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ name }}</td>
+        <td>Bob</td>
         <td>{{ accountAddress }}</td>
       </tr>
     </tbody>
@@ -27,6 +27,7 @@
 
   <h2 class="list-title">Current Tokens</h2>
 
+  <h3 class="list-title">Our Goal - Summer & Fall 2022</h3>
   <table class="table table-sm table-dark mt-3">
     <thead>
       <tr>
@@ -49,16 +50,58 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let token of rewardTokens" class="col-bo-token">
-        <td>{{ token.activityCreator }}</td>
-        <td>{{ token.activityName }}</td>
-        <td class="tokenAddress col-bo">{{ token.publicAddress }}</td>
-        <td>{{ token.result.score }}</td>
-        <td>{{ token.result.message }}</td>
-        <td>{{ token.reward.type }}</td>
-        <td>{{ token.reward.value }}</td>
-        <td>{{ token.reward.targetPartner }}</td>
-        <td>{{ token.reward.expiryDate!.split('T')[0] }}</td>
+      <tr class="col-bo-token">
+        <td>Sukhdev</td>
+        <td>Learn to make tacos</td>
+        <td class="tokenAddress">{{ accountAddress }}</td>
+        <td>10</td>
+        <td>Well Done!</td>
+        <td>Discount</td>
+        <td>5</td>
+        <td>Little Chef</td>
+        <td>2022-04-20</td>
+      </tr>
+      <tr class="col-bo-token">
+        <td>Sukhdev</td>
+        <td>Challenge: Make tacos</td>
+        <td class="tokenAddress">{{ accountAddress }}</td>
+        <td>10</td>
+        <td>Well Done!</td>
+        <td>Monthly Membership</td>
+        <td>1</td>
+        <td>Jack's Restaurant</td>
+        <td>2022-04-20</td>
+      </tr>
+      <tr class="col-bo-token">
+        <td>Sukhdev</td>
+        <td>Weekly Score</td>
+        <td class="tokenAddress">{{ accountAddress }}</td>
+        <td>2</td>
+        <td>Well Done!</td>
+        <td>Points</td>
+        <td>5</td>
+        <td>Little Chef</td>
+        <td>2022-04-20</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+
+  <h3 class="list-title">What we have achieved so far - Winter 2022</h3>
+  <table class="table table-sm table-dark mt-3">
+    <thead>
+      <tr>
+        <th scope="col">Public Addr</th>
+        <th scope="col">Reward type</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="col-bo-token">
+        <td>{{ accountAddress }}</td>
+        <td>Rew</td>
+        <td>Val</td>
       </tr>
     </tbody>
   </table>
@@ -73,7 +116,7 @@
         <p class="card-author">By: Sukhdev</p>
       </div>
       <div class="long-img-container text-center">
-        <img src="Taco1.jpg" alt="" class="long-img" />
+        <img src="../../assets/images/Taco1.jpg" alt="" class="long-img" />
       </div>
     </div>
 
@@ -95,7 +138,7 @@
         <p class="card-author">40 mins</p>
       </div>
       <div class="short-img-container text-center">
-        <img src="Taco2.jpg" alt="" class="short-img" />
+        <img src="../../assets/images/Taco2.jpg" alt="" class="short-img" />
       </div>
     </div>
 
@@ -124,7 +167,7 @@
       <p class="m-0">Lesser than 3: 5 Points</p>
       <p class="m-0">Else: 10 points</p>
     </div>
-    <img src="Taco3.jpg" alt="" class="score-img" />
+    <img src="../../assets/images/Taco3.jpg" alt="" class="score-img" />
   </div>
 
   <br />
