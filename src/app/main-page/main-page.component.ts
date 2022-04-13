@@ -18,13 +18,8 @@ export class MainPageComponent implements OnInit {
   onUserAdd(data: any) {
     if(data.name.length > 0) {
       let user = new User(data.name);
-
-      this.userService.addUser(user).subscribe((newUser: User) => {
-        this.addUserName = '';
-        this.userService.onUserAdded.emit(newUser);
-        const { id } = newUser;
-        this.router.navigate(['/user', id]);
-      });
+      
+      this.router.navigate(['/user']);
     }
 
     else {

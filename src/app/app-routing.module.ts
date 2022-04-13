@@ -6,8 +6,8 @@ import { UserPageComponent } from './user-page/user-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'user/:id', component: UserPageComponent },
-  { path: 'user/:id/offers', component: ThirdPageComponent },
+  { path: 'user', component: UserPageComponent },
+  { path: 'user/offers', component: ThirdPageComponent },
 ];
 
 @NgModule({
