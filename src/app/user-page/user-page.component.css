@@ -16,6 +16,15 @@
   font-size: 20px;
 }
 
+.space {
+  margin-top: 50px;
+}
+
+.activity {
+  background-color: #F2AA4CFF;
+  color: #101820FF;
+}
+
 .col-ob {
   background-color: #F2AA4CFF;
   color: #101820FF;

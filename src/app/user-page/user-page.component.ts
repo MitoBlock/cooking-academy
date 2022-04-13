@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RewardToken } from '../models/reward-token';
 import { User } from '../models/user';
 import { UserService } from '../service/user.service';
+import { Balance } from '../models/balance';
 
 @Component({
   selector: 'app-user-page',
@@ -12,14 +13,10 @@ import { UserService } from '../service/user.service';
 })
 
 export class UserPageComponent implements OnInit {
-  accountAddress = 'mito444';
 
-  name = '';
-  score = 0;
-  
-  rewardTokens: RewardToken[] = [];
-  accountId = -1;
-  id = -1;
+  balance : Balance = {denom: "mitocell", amount: "0",};
+  user : User = new User("Bob", "mito1ssl9xlelyk0u93w5x50snxwslcspfq4pdurj34", this.balance )
+
   showTimer = false;
   counter = 5;
 
@@ -30,100 +27,98 @@ export class UserPageComponent implements OnInit {
   ) {}
 
 
-    onKeyChangeScore(event: KeyboardEvent) { 
-     this.score = +(event.target as HTMLInputElement).value 
-  }
+  //   onKeyChangeScore(event: KeyboardEvent) { 
+  //    this.score = +(event.target as HTMLInputElement).value 
+  // }
 
-  handleMainSubmit() {
-    const rewardToken: RewardToken = {
-      activityName: 'Weekly Score',
-      activityCreator: 'Little Chef',
-      publicAddress: this.accountAddress,
-      result: {
-        score: this.score,
-        message: 'Well done!',
-      },
-      reward: {
-        type: 'Points',
-        value: this.score < 3 ? 5 : 10,
-        targetPartner: 'Little Chef'
-      },
-    };
+  // handleMainSubmit() {
+  //   const rewardToken: RewardToken = {
+  //     activityName: 'Weekly Score',
+  //     activityCreator: 'Little Chef',
+  //     publicAddress: this.accountAddress,
+  //     result: {
+  //       score: this.score,
+  //       message: 'Well done!',
+  //     },
+  //     reward: {
+  //       type: 'Points',
+  //       value: this.score < 3 ? 5 : 10,
+  //       targetPartner: 'Little Chef'
+  //     },
+  //   };
 
-    this.userService
-      .addToken(rewardToken)
-      .subscribe((account) => {
-        this.rewardTokens = account.rewardTokens;
-      });
-  }
+  //   this.userService
+  //     .addToken(rewardToken)
+  //     .subscribe((account) => {
+  //       this.rewardTokens = account.rewardTokens;
+  //     });
+  // }
 
   handleOffersClick() {
     this.router.navigate(['/user', 'offers']);
   }
 
-  handleMakeTacos() {
-    const rewardToken: RewardToken = {
-      activityName: 'Challenge: Make Tacos',
-      activityCreator: 'Sukhdev',
-      publicAddress: this.accountAddress,
-      result: {
-        score: 10,
-        message: 'Well done!',
-      },
-      reward: {
-        type: 'Monthly Membership',
-        value: 1,
-        targetPartner: 'Jacks Restaurant',
-      },
-    };
+  // handleMakeTacos() {
+  //   const rewardToken: RewardToken = {
+  //     activityName: 'Challenge: Make Tacos',
+  //     activityCreator: 'Sukhdev',
+  //     publicAddress: this.accountAddress,
+  //     result: {
+  //       score: 10,
+  //       message: 'Well done!',
+  //     },
+  //     reward: {
+  //       type: 'Monthly Membership',
+  //       value: 1,
+  //       targetPartner: 'Jacks Restaurant',
+  //     },
+  //   };
 
 
-    this.showTimer = true;
-    let timer = setInterval(() => {
-      if (this.counter <= 0) {
-        clearInterval(timer);
-        this.showTimer = false
-          this.userService
-            .addToken(rewardToken)
-            .subscribe((account) => {
-              this.rewardTokens = account.rewardTokens;
-            });
-      }
-      this.counter--
-    }, 1000);
+  //   this.showTimer = true;
+  //   let timer = setInterval(() => {
+  //     if (this.counter <= 0) {
+  //       clearInterval(timer);
+  //       this.showTimer = false
+  //         this.userService
+  //           .addToken(rewardToken)
+  //           .subscribe((account) => {
+  //             this.rewardTokens = account.rewardTokens;
+  //           });
+  //     }
+  //     this.counter--
+  //   }, 1000);
 
-  }
+  // }
 
-  // handle learned tacos button click
-  learnedTacos() {
-    const rewardToken: RewardToken = {
-      activityName: 'Learn to make tacos',
-      activityCreator: 'Sukhdev',
-      publicAddress: this.accountAddress,
-      result: {
-        score: 10,
-        message: 'Well done!',
-      },
-      reward: {
-        type: 'Discount',
-        value: 5,
-        targetPartner: 'Little Chef',
-      },
-    };
-    this.userService
-      .addToken(rewardToken)
-      .subscribe((account) => {
-        this.rewardTokens = account.rewardTokens;
-      });
-  }
+  // // handle learned tacos button click
+  // learnedTacos() {
+  //   const rewardToken: RewardToken = {
+  //     activityName: 'Learn to make tacos',
+  //     activityCreator: 'Sukhdev',
+  //     publicAddress: this.accountAddress,
+  //     result: {
+  //       score: 10,
+  //       message: 'Well done!',
+  //     },
+  //     reward: {
+  //       type: 'Discount',
+  //       value: 5,
+  //       targetPartner: 'Little Chef',
+  //     },
+  //   };
+  //   this.userService
+  //     .addToken(rewardToken)
+  //     .subscribe((account) => {
+  //       this.rewardTokens = account.rewardTokens;
+  //     });
+  // }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.userService.getUser(this.id).subscribe((user: User) => {
-      this.name = user.name;
-      this.accountAddress = user.account?.publicAddress ?? '';
-      this.accountId = user.account?.id ?? -1;
-      this.rewardTokens = user.account?.rewardTokens ?? [];
+    this.userService.getBalance(this.user.account).subscribe((balance : Balance) => {
+      console.log(balance);
+      this.user.balance.denom = balance.denom;
+      this.user.balance.amount = balance.amount;
     });
   }
 }

@@ -16,9 +16,7 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {}
 
   onUserAdd(data: any) {
-    if(data.name.length > 0) {
-      let user = new User(data.name);
-      
+    if(data.name.length > 0) { 
       this.router.navigate(['/user']);
     }
 

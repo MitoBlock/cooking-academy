@@ -5,6 +5,7 @@ import { Account } from "../models/account";
 import { RewardToken } from "../models/reward-token";
 import { User } from "../models/user";
 import { api } from "./api";
+import { Balance } from "../models/balance";
 
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -43,6 +44,10 @@ export class UserService {
 
 	getUser(id : number) {
 		return this.http.get<User>(`${api}user/${id}`);
+	}
+
+	getBalance(address: string){
+		return this.http.get<Balance>(`${api}cosmos/bank/v1beta1/balances/${address}/by_denom?denom=mitocell`);
 	}
 	
 	

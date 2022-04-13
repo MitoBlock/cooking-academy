@@ -1,11 +1,13 @@
-import { Account } from "./account"
+import { Balance } from "./balance";
 
 export class User {
-	id? : number
 	public name: string
-	account? : Account
+	account : string
+	balance : Balance
 	
-	constructor(name: string,) {
+	constructor(name: string, account : string, balance : Balance) {
 		this.name = name;
+		this.account = account;
+		this.balance = balance;
 	}
 }
