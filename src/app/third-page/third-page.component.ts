@@ -11,7 +11,7 @@ import { UserService } from '../service/user.service';
 })
 export class ThirdPageComponent implements OnInit {
   name = '';
-  accountAddress = '';
+  accountAddress = 'mito44';
   rewardTokens: RewardToken[] = [];
   accountId = -1;
   id = -1;
