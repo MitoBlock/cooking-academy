@@ -172,3 +172,21 @@ table {
   white-space:nowrap;
   width: 100px;
 }
+
+.discount-img{
+  /* background-image: url("../../assets/images/DiscountTokenLarge2.png"); */
+  width: 450px;
+  height: 450px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: none;
+}
+.centered {
+  position: absolute;
+  top: 26%;
+  left: 20%;
+  font-size: 15px;
+}

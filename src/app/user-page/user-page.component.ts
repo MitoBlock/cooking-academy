@@ -93,7 +93,7 @@ export class UserPageComponent implements OnInit {
   // }
 
   // // handle learned tacos button click
-  // learnedTacos() {
+  learnedTacos() {
   //   const rewardToken: RewardToken = {
   //     activityName: 'Learn to make tacos',
   //     activityCreator: 'Sukhdev',
@@ -113,7 +113,16 @@ export class UserPageComponent implements OnInit {
   //     .subscribe((account) => {
   //       this.rewardTokens = account.rewardTokens;
   //     });
-  // }
+  const targetDiv = document.getElementById("discount-img");
+
+    if(targetDiv?.style.display !== "block"){
+      targetDiv!.style.display = "block";
+    } else{
+      targetDiv!.style.display = "none";
+    }
+
+  }
+  
 
   ngOnInit() {
     this.userService

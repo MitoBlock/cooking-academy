@@ -28,7 +28,18 @@
   <br />
 
   <h2 class="list-title space">Current Tokens</h2>
-  <table class="table table-sm table-dark mt-3">
+  <div class="discount-img" id="discount-img">
+    <img src="../../assets/images/DiscountTokenLarge2.png">
+    <div class="centered"> <b>User</b>: {{ user.account }} <br> 
+      <b>Activity: </b>  <br> 
+      <b>Score:</b>  <br> 
+      <b>Discount Value:</b>  <br> 
+      <b>Item Type:</b>   
+      <br> <b>Expiry:</b> 
+      
+    </div>
+  </div>
+  <!-- <table class="table table-sm table-dark mt-3">
     <thead>
       <tr>
         <th scope="col" class="col-ob">Public Addr</th>
@@ -41,7 +52,8 @@
         <td>{{ user.balance.amount }}</td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  
 
   <br/>
 
@@ -59,7 +71,7 @@
 
     <br />
     
-  <!-- <button class="btn btn-dark btn-lg blk-btn" (click)="learnedTacos()">Done</button> -->
+  <button class="btn btn-dark btn-lg blk-btn" (click)="learnedTacos()">Done</button> 
 
   <br />
   <br />
