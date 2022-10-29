@@ -40,6 +40,10 @@ export class UserService {
 	addToken(rewardToken : RewardToken) : Observable<Account> {
 		return this.http.post<Account>(`${api}rewardToken`, rewardToken, HTTP_OPTIONS);
 	}
+	// addDiscountBurritoToken() : Observable<Account> {
+	addDiscountBurritoToken() : any {
+		return this.http.get(`${goapi}discountBurritoToken`);
+	}
 
 	getTokens() : Observable<Token[]> {
 		return this.http.get<Token[]>(`${goapi}tokens`);

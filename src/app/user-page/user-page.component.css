@@ -48,7 +48,6 @@
   border: 5px solid white;
   border-radius: 50px;
   padding: 20px;
-  margin-top: 5px;
 }
 
 .blk-btn {
@@ -63,7 +62,7 @@
 
 .blk-btn:hover {
   background-color: #36454F;
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   box-shadow: 0 5px 15px rgba(46, 204, 113, .4);
 }
 
@@ -127,7 +126,7 @@ table {
 
 .card-container {
   padding: 10px;
-  height: 100px;
+  /* height: 100px; */
   outline: 2px solid green;
   background-color: whitesmoke;
   width: 500px;
@@ -171,4 +170,44 @@ table {
   overflow:hidden;
   white-space:nowrap;
   width: 100px;
+}
+
+.counter {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+/* --- styles from third page --- */
+
+.knife{
+		height: auto;
+		width: 61.5%;
+		
+}
+
+.coupon-card {
+	background-color: whitesmoke;
+	width: 650px;
+	display: grid;
+	grid-template-columns: 1fr 0.7fr;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+}
+
+.coupon-title {
+	font-weight: bold;
+}
+
+.long-img {
+  object-fit: cover;
+  width: 200px;
+  height: 70px;
+	
+}
+.short-img {
+  object-fit: cover;
+  width: 150px;
+  height: 70px;
 }

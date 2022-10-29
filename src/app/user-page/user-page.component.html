@@ -1,11 +1,13 @@
 <div class="user-page-container">
   <header class="header d-flex justify-content-between align-items-center">
     <div class="logo-container">
-
-      <img class="logo" src="../../assets/images/LittleChefLogo.jpeg" alt="logo" />
-    
+      <img
+        class="logo"
+        src="../../assets/images/LittleChefLogo.jpeg"
+        alt="logo"
+      />
     </div>
-    <button class="btn btn-danger btn-lg mx-2" (click)="handleOffersClick()">Offers</button>
+    <!-- <button class="btn btn-danger btn-lg mx-2" (click)="handleOffersClick()">Offers</button> -->
   </header>
 
   <h1 class="list-title space">Account Info</h1>
@@ -43,51 +45,67 @@
     </tbody>
   </table>
 
-  <br/>
+  <br />
 
   <h1 class="list-title space activity">Activities</h1>
 
+  <div class="d-flex">
     <div class="card-container card-two-col">
       <div class="d-flex flex-column justify-content-center px-2">
-        <h6 class="card-title m-0">Learn to make tacos (100)</h6>
-        <p class="card-author">By: Sukhdev</p>
+        <h6 class="card-title m-0">Learn to make tacos (10)</h6>
       </div>
       <div class="long-img-container text-center">
         <img src="../../assets/images/Taco1.jpg" alt="" class="long-img" />
       </div>
     </div>
 
-    <br />
-    
-  <!-- <button class="btn btn-dark btn-lg blk-btn" (click)="learnedTacos()">Done</button> -->
+    <button class="btn btn-dark btn-lg blk-btn m-3" (click)="learnTacos()">
+      Done
+    </button>
+  </div>
 
   <br />
-  <br />
-  
 
-    <div class="card-container card-three-col">
-      <div class="d-flex flex-column justify-content-center px-2">
-        <h6 class="card-title m-0">Challenge: Make tacos (500)</h6>
-        <p class="card-author">By: Sukhdev</p>
+  <div class="d-flex align-items-center">
+      <div class="card-container card-three-col">
+        <div class="d-flex flex-column justify-content-center px-2">
+          <h6 class="card-title m-0">Weekly Leader board</h6>
+          <ul class="list-group list-group-numbered">
+            <li class="list-group-item py-0 small">Bob</li>
+            <li class="list-group-item py-0 small">Alice</li>
+            <li class="list-group-item py-0 small">Ringo</li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column px-2 justify-content-center">
+          <h6 class="card-title m-0">Duration</h6>
+          <p class="card-author">40 mins</p>
+        </div>
+        <div class="short-img-container text-center">
+          <img src="../../assets/images/Taco2.jpg" alt="" class="short-img" />
+        </div>
       </div>
-      <div class="d-flex flex-column px-2 justify-content-center">
-        <h6 class="card-title m-0">Duration</h6>
-        <p class="card-author">40 mins</p>
-      </div>
-      <div class="short-img-container text-center">
-        <img src="../../assets/images/Taco2.jpg" alt="" class="short-img" />
+    <button class="m-3 btn btn-dark btn-lg blk-btn" (click)="handleMakeTacos()">
+      Start
+    </button>
+  </div>
+  <div *ngIf="showTimer" class="counter m-2 h3 text-danger">{{ counter }}</div>
+  <br />
+
+
+  <div class="d-flex justify-content-around w-100 align-items-center">
+    <div class="coupon-card">
+      <h4 class="coupon-title">Get 5% off the classes</h4>
+
+      <div class="text-center">
+        <img
+          class="long-img"
+          src="../../assets/images/team_view3.jpg"
+          alt="knife"
+        />
       </div>
     </div>
-
-    <!-- <div *ngIf="showTimer" class="counter h3 text-danger">{{ counter }}</div> -->
-
-    <br />
-  
-    <!-- <button class="btn btn-dark btn-lg blk-btn" (click)="handleMakeTacos()"> -->
-      <!-- Start -->
-    <!-- </button> -->
-
-    <br />
-  <br />
-
+    <div>
+      <button class="btn btn-lg m-3 btn-dark blk-btn" (click)="handleUseDiscount()"> Use </button>
+    </div>
+  </div>
 </div>
