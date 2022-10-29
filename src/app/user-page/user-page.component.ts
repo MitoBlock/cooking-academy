@@ -123,5 +123,10 @@ export class UserPageComponent implements OnInit {
         this.user.balance.denom = balance.denom;
         this.user.balance.amount = balance.amount;
       });
+
+    this.userService.getTokens().subscribe((tokenList) => {
+      // this.user.rewardTokens = tokenList;
+      console.log({ tokenList })
+    })
   }
 }

@@ -5,8 +5,10 @@ import { Account } from "../models/account";
 import { RewardToken } from "../models/reward-token";
 import { User } from "../models/user";
 import { api } from "./api";
+import { goapi } from "./api";
 import { Balance } from "../models/balance";
 import { BalanceWrapper } from "../models/balance-dto";
+import { Token } from "@angular/compiler";
 
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -37,6 +39,10 @@ export class UserService {
 
 	addToken(rewardToken : RewardToken) : Observable<Account> {
 		return this.http.post<Account>(`${api}rewardToken`, rewardToken, HTTP_OPTIONS);
+	}
+
+	getTokens() : Observable<Token[]> {
+		return this.http.get<Token[]>(`${goapi}tokens`);
 	}
 	
 	addUser(user : User) : Observable<User> {
