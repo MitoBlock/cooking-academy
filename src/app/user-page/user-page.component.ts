@@ -18,6 +18,7 @@ export class UserPageComponent implements OnInit {
     this.balance,
   );
 
+  membershipClaimed = false
   showTimer = false;
   counter = 5;
   score = 0;
@@ -75,9 +76,6 @@ export class UserPageComponent implements OnInit {
           });
           console.log('setting reward claimed to true');
           this.userRewarded = true;
-          // .subscribe((account) => {
-          //   this.rewardTokens = account.rewardTokens;
-          // });
         });
       }
       this.counter--;
@@ -89,6 +87,7 @@ export class UserPageComponent implements OnInit {
     this.userService.addMembershipToken().subscribe((data) => {
       console.log({ data });
     });
+    this.membershipClaimed = true
     console.log('get gym membership clicked');
   }
 
@@ -97,7 +96,8 @@ export class UserPageComponent implements OnInit {
     console.log('handle use discount');
     this.userService.removeDiscountTokenStatus().subscribe((data) => {
       console.log('discount token invalidated');
-      // TODO: remove token from list: update token list
+      this.userRewarded = false;
+      this.refreshTokenList()
     });
   }
 
@@ -122,10 +122,25 @@ export class UserPageComponent implements OnInit {
     // this.userService.getTokenStatus(1).subscribe(data => {
     //   console.log({ data })
     // })
+    this.refreshTokenList();
+  }
 
-    this.userService.getTokens().subscribe((data) => {
-      this.tokenList = data.DiscountToken;
-      console.log({ tokenList: this.tokenList });
+  refreshTokenList() {
+    this.userService.getDiscountTokens().subscribe((data) => {
+      console.log('calling tokens service');
+      if (data.DiscountToken.length !== 0) {
+        console.log('got tokens response');
+        this.userService.getDiscountTokenStatus().subscribe((statusData) => {
+          if (
+            statusData.DiscountTokenStatus &&
+            statusData.DiscountTokenStatus[0].status == 'Valid'
+          ) {
+            console.log('statis valid');
+            this.tokenList = data.DiscountToken;
+            this.userRewarded = true;
+          } else this.tokenList = []
+        });
+      }
     });
   }
 }

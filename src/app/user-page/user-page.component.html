@@ -89,8 +89,9 @@
     <button
       class="btn btn-dark btn-lg blk-btn m-3"
       (click)="getGymMembership()"
+      [disabled]="membershipClaimed"
     >
-      Claim
+      {{ membershipClaimed ? "Claimed!" : "Claim" }}
     </button>
   </div>
   <br />

@@ -34,9 +34,9 @@ export interface TokensResp {
 }
 
 
-export interface TokenStatusResp {
+export interface DiscountTokenStatusResp {
   DiscountToken: DiscountToken
-  DiscountTokenStatus: DiscountTokenStatus[]
+  DiscountTokenStatus?: DiscountTokenStatus[]
   pagination: Pagination
 }
 
@@ -67,3 +67,36 @@ export interface Pagination {
   next_key: string
   total: string
 }
+
+
+
+
+export interface MembershipTokenStatusResp {
+  MembershipToken: MembershipToken
+  MembershipTokenStatus: MembershipTokenStatus[]
+  pagination: Pagination
+}
+
+export interface MembershipToken {
+  creator: string
+  id: string
+  timestamp: string
+  activityName: string
+  score: string
+  message: string
+  membershipDuration: string
+  eligibleCompanies: string
+  expiryDate: string
+  createdAt: string
+}
+
+export interface MembershipTokenStatus {
+  id: string
+  creator: string
+  timestamp: string
+  status: string
+  tokenID: string
+  createdAt: string
+}
+
+
