@@ -24,6 +24,7 @@ export class UserPageComponent implements OnInit {
   counter = 5;
   score = 0;
   accountAddress = 'mitoxxx'
+  rewardClaimed = false;
   tokenList : Token[] = [];
 
   constructor(
@@ -90,6 +91,8 @@ export class UserPageComponent implements OnInit {
             this.userService.getTokens().subscribe((tokens) => {
               console.log( { tokens })
             });
+            console.log("setting reward claimed to true")
+            this.rewardClaimed = true;
             // .subscribe((account) => {
             //   this.rewardTokens = account.rewardTokens;
             // });
@@ -100,6 +103,11 @@ export class UserPageComponent implements OnInit {
 
   }
 
+  // get token for gym membership
+  getGymMembership() {
+    // TODO: add gym membership token
+    console.log('get gym membership clicked');
+  }
 
   // handle discount for 5% off
   handleUseDiscount() {
