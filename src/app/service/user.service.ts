@@ -60,6 +60,10 @@ export class UserService {
 		return this.http.get<User>(`${api}user/${id}`);
 	}
 
+	getUserAddress() : Observable<string> {
+		return this.http.get<string>(`${goapi}user`);
+	}
+
 	getBalance(address: string){
 		return this.http.get<BalanceWrapper>(`${api}cosmos/bank/v1beta1/balances/${address}/by_denom?denom=mitocell`);
 	}

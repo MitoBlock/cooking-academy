@@ -112,6 +112,7 @@ export class UserPageComponent implements OnInit {
   // handle discount for 5% off
   handleUseDiscount() {
     // TODO: add discount token
+    console.log('handle use discount')
   }
 
   // handle learned tacos button click
@@ -146,6 +147,10 @@ export class UserPageComponent implements OnInit {
         this.user.balance.denom = balance.denom;
         this.user.balance.amount = balance.amount;
       });
+
+      this.userService.getUserAddress().subscribe(addr => {
+        this.accountAddress = addr
+      })
 
     this.userService.getTokens().subscribe((tokenList) => {
       // this.user.rewardTokens = tokenList;
