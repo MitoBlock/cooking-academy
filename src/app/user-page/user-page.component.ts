@@ -86,7 +86,7 @@ export class UserPageComponent implements OnInit {
       if (this.counter <= 0) {
         clearInterval(timer);
         this.showTimer = false
-        this.userService.addDiscountBurritoToken().then(() => {
+        this.userService.addDiscountBurritoToken().subscribe(() => {
             this.userService.getTokens().subscribe((tokens) => {
               console.log( { tokens })
             });
