@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Account } from "../models/account";
-import { RewardToken, TokensResp } from "../models/reward-token";
+import { RewardToken, TokensResp, TokenStatusResp } from "../models/reward-token";
 import { User } from "../models/user";
-import { api } from "./api";
+import { api, mitoapi } from "./api";
 import { goapi } from "./api";
 import { Balance } from "../models/balance";
 import { BalanceWrapper } from "../models/balance-dto";
@@ -35,6 +35,10 @@ export class UserService {
 		// should be delete action, but that doesn't allow body
 		return this.http.put<Account>(`${api}rewardToken`, rewardToken);
   }
+
+	getTokenStatus(id: number) : Observable<TokenStatusResp> {
+		return this.http.get<TokenStatusResp>(`${mitoapi}discount_token_status_q/${id}`);
+	}
 
 	addToken(rewardToken : RewardToken) : Observable<Account> {
 		return this.http.post<Account>(`${api}rewardToken`, rewardToken, HTTP_OPTIONS);

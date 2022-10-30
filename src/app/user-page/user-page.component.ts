@@ -152,8 +152,13 @@ export class UserPageComponent implements OnInit {
         this.accountAddress = addr
       })
 
+      this.userService.getTokenStatus(1).subscribe(data => {
+        console.log({ data })
+      })
+
     this.userService.getTokens().subscribe((data) => {
       this.tokenList = data.DiscountToken
+      console.log({ tokenList: this.tokenList })
     })
   }
 }
