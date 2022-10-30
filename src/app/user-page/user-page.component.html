@@ -21,7 +21,7 @@
     <tbody>
       <tr>
         <td>Bob</td>
-        <td class="tokenAddress">{{ accountAddress }}</td>
+        <td class="tokenAddress">{{ user.account }}</td>
       </tr>
     </tbody>
   </table>
@@ -58,7 +58,7 @@
     </div>
 
     <button
-      [disabled]="rewardClaimed"
+      [disabled]="userRewarded"
       class="m-3 btn btn-dark btn-lg blk-btn"
       (click)="handleMakeTacos()"
     >
@@ -109,7 +109,7 @@
     </div>
     <div>
       <button
-        [disabled]="!rewardClaimed"
+        [disabled]="!userRewarded"
         class="btn btn-lg m-3 btn-dark blk-btn"
         (click)="handleUseDiscount()"
       >

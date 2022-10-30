@@ -27,49 +27,51 @@ export class UserService {
 
 	constructor(private http: HttpClient){}
 
-  reduceTokenPoints(token: RewardToken) : Observable<Account>  {
-		return this.http.put<Account>(`${api}rewardToken/${token.id}`, {});
-  }
 
-	removeToken(rewardToken : RewardToken) : Observable<Account> {
+	// TODO: shoould the next endpoints be using api or mitoapi?
+	removeDiscountTokenStatus() : Observable<any> {
 		// should be delete action, but that doesn't allow body
-		return this.http.put<Account>(`${api}rewardToken`, rewardToken);
+		return this.http.get<any>(`${api}deleteDiscountTokenStatus`);
   }
-
-	getTokenStatus(id: number) : Observable<TokenStatusResp> {
-		return this.http.get<TokenStatusResp>(`${mitoapi}discount_token_status_q/${id}`);
-	}
-
-	addToken(rewardToken : RewardToken) : Observable<Account> {
-		return this.http.post<Account>(`${api}rewardToken`, rewardToken, HTTP_OPTIONS);
-	}
+	removeMembershipTokenStatus() : Observable<any> {
+		return this.http.get<any>(`${api}deleteMembershipTokenStatus`);
+  }
 
 	// addDiscountBurritoToken() : Observable<Account> {
-	addDiscountBurritoToken() : Observable<any> {
+	addDiscountToken() : Observable<any> {
         console.log("add burito token")
-		return this.http.get(`${goapi}discountBurritoToken`);
+		return this.http.get(`${goapi}discountToken`);
+	}
+	addMembershipToken() : Observable<any> {
+        console.log("adding membership token")
+		return this.http.get(`${goapi}membershipToken`);
 	}
 
+	// getTokenStatus(id: number) : Observable<TokenStatusResp> {
+		// hardcoding token id
+	getDiscountTokenStatus() : Observable<TokenStatusResp> {
+		return this.http.get<TokenStatusResp>(`${mitoapi}discount_token_status_q/0`);
+	}
+
+	getMembershipTokenStatus() : Observable<TokenStatusResp> {
+		return this.http.get<TokenStatusResp>(`${mitoapi}discount_token_status_q/0`);
+	}
 
 	getTokens() : Observable<TokensResp> {
 		return this.http.get<TokensResp>(`${goapi}tokens`);
 	}
-	
-	addUser(user : User) : Observable<User> {
-		return this.http.post<User>(`${api}user`, user);
-	}
 
-	getUser(id : number) {
-		return this.http.get<User>(`${api}user/${id}`);
-	}
 
-	getUserAddress() : Observable<string> {
-		return this.http.get<string>(`${goapi}user`);
-	}
+	// getUser(id : number) {
+	// 	return this.http.get<User>(`${api}user/${id}`);
+	// }
 
-	getBalance(address: string){
-		return this.http.get<BalanceWrapper>(`${api}cosmos/bank/v1beta1/balances/${address}/by_denom?denom=mitocell`);
-	}
-	
+	// getUserAddress() : Observable<string> {
+	// 	return this.http.get<string>(`${goapi}user`);
+	// }
+
+	// getBalance(address: string){
+	// 	return this.http.get<BalanceWrapper>(`${api}cosmos/bank/v1beta1/balances/${address}/by_denom?denom=mitocell`);
+	// }
 	
 }
