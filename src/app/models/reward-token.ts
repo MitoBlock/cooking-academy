@@ -24,6 +24,10 @@ export interface Token {
 	membershipDuration?: string
 	expiryDate: string
 	discountValue: string
+}
 
+export interface TokensResp {
+	DiscountToken : Token[]
+	pagination: { total : number }
 }
 

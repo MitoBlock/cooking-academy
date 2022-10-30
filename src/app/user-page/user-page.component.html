@@ -31,6 +31,12 @@
 
   <h2 class="list-title space">Current Tokens</h2>
 
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let t of tokenList; index as i">
+      <h3>{{ t.activityName }}</h3>
+      <p>{{ t.score }}</p>
+    </li>
+  </ul>
 
   <br />
 
@@ -43,7 +49,7 @@
         <p class="small">
           REWARD: 5% Discount off protein burrito cooking class
         </p>
-        <p class="small font-weight-bold"> Duration: 40 mins</p>
+        <p class="small font-weight-bold">Duration: 40 mins</p>
       </div>
 
       <div class="long-img-container text-center">
@@ -51,7 +57,11 @@
       </div>
     </div>
 
-    <button [disabled]="rewardClaimed" class="m-3 btn btn-dark btn-lg blk-btn" (click)="handleMakeTacos()">
+    <button
+      [disabled]="rewardClaimed"
+      class="m-3 btn btn-dark btn-lg blk-btn"
+      (click)="handleMakeTacos()"
+    >
       Start
     </button>
   </div>
@@ -76,7 +86,10 @@
         <img src="../../assets/images/Taco2.jpg" alt="" class="short-img" />
       </div>
     </div>
-    <button class="btn btn-dark btn-lg blk-btn m-3" (click)="getGymMembership()">
+    <button
+      class="btn btn-dark btn-lg blk-btn m-3"
+      (click)="getGymMembership()"
+    >
       Claim
     </button>
   </div>
@@ -95,7 +108,8 @@
       </div>
     </div>
     <div>
-      <button  [disabled]="!rewardClaimed" 
+      <button
+        [disabled]="!rewardClaimed"
         class="btn btn-lg m-3 btn-dark blk-btn"
         (click)="handleUseDiscount()"
       >

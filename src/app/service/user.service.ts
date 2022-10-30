@@ -2,13 +2,12 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Account } from "../models/account";
-import { RewardToken } from "../models/reward-token";
+import { RewardToken, TokensResp } from "../models/reward-token";
 import { User } from "../models/user";
 import { api } from "./api";
 import { goapi } from "./api";
 import { Balance } from "../models/balance";
 import { BalanceWrapper } from "../models/balance-dto";
-import { Token } from "@angular/compiler";
 
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -48,8 +47,8 @@ export class UserService {
 	}
 
 
-	getTokens() : Observable<Token[]> {
-		return this.http.get<Token[]>(`${goapi}tokens`);
+	getTokens() : Observable<TokensResp> {
+		return this.http.get<TokensResp>(`${goapi}tokens`);
 	}
 	
 	addUser(user : User) : Observable<User> {
