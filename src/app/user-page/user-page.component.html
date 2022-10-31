@@ -1,11 +1,13 @@
 <div class="user-page-container">
   <header class="header d-flex justify-content-between align-items-center">
     <div class="logo-container">
-
-      <img class="logo" src="../../assets/images/LittleChefLogo.jpeg" alt="logo" />
-    
+      <img
+        class="logo"
+        src="../../assets/images/LittleChefLogo.jpeg"
+        alt="logo"
+      />
     </div>
-    <button class="btn btn-danger btn-lg mx-2" (click)="handleOffersClick()">Offers</button>
+    <!-- <button class="btn btn-danger btn-lg mx-2" (click)="handleOffersClick()">Offers</button> -->
   </header>
 
   <h1 class="list-title space">Account Info</h1>
@@ -18,76 +20,107 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{ user.name }}</td>
+        <td>Bob</td>
         <td class="tokenAddress">{{ user.account }}</td>
       </tr>
     </tbody>
   </table>
-  <br />
-
-  <br />
 
   <h2 class="list-title space">Current Tokens</h2>
-  <table class="table table-sm table-dark mt-3">
-    <thead>
-      <tr>
-        <th scope="col" class="col-ob">Public Addr</th>
-        <th scope="col" class="col-bo">Balance (mitocell)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="col-bo-token">
-        <td class="tokenAddress">{{ user.account }}</td>
-        <td>{{ user.balance.amount }}</td>
-      </tr>
-    </tbody>
-  </table>
 
-  <br/>
+  <div *ngIf="tokenList.length > 0 && currentToken != null" class="tokenBadge">
+    <img
+      class="tokenBadgeImage"
+      src="../../assets/images/DiscountTokenLarge2.png"
+    />
+    <div class="centered">
+      <b>User</b>: {{ user.account }} <br />
+      <b>Activity:</b> {{ currentToken.activityName }} <br />
+      <b>Score:</b> {{ currentToken.score }} <br />
+      <b>Discount Value:</b> {{ currentToken.discountValue }} <br />
+      <b>Item Type:</b> {{ currentToken.itemType }} <br />
+      <b>Expiry:</b> {{ currentToken.expiryDate }} <br />
+    </div>
+  </div>
+
+  <br />
 
   <h1 class="list-title space activity">Activities</h1>
 
+  <div class="d-flex align-items-center">
     <div class="card-container card-two-col">
       <div class="d-flex flex-column justify-content-center px-2">
-        <h6 class="card-title m-0">Learn to make tacos (100)</h6>
-        <p class="card-author">By: Sukhdev</p>
+        <h6 class="card-title m-0">Learn to Make Tacos</h6>
+        <p class="small">
+          REWARD: 5% Discount off protein burrito cooking class
+        </p>
+        <p class="small font-weight-bold">Duration: 40 mins</p>
       </div>
+
       <div class="long-img-container text-center">
         <img src="../../assets/images/Taco1.jpg" alt="" class="long-img" />
       </div>
     </div>
 
-    <br />
-    
-  <!-- <button class="btn btn-dark btn-lg blk-btn" (click)="learnedTacos()">Done</button> -->
+    <button
+      [disabled]="userRewarded"
+      class="m-3 btn btn-dark btn-lg blk-btn"
+      (click)="handleMakeTacos()"
+    >
+      Start
+    </button>
+  </div>
+  <div *ngIf="showTimer" class="counter m-2 h3 text-danger">{{ counter }}</div>
 
   <br />
-  <br />
-  
 
-    <div class="card-container card-three-col">
+  <div class="d-flex align-items-center">
+    <div class="card-container card-two-col">
       <div class="d-flex flex-column justify-content-center px-2">
-        <h6 class="card-title m-0">Challenge: Make tacos (500)</h6>
-        <p class="card-author">By: Sukhdev</p>
-      </div>
-      <div class="d-flex flex-column px-2 justify-content-center">
-        <h6 class="card-title m-0">Duration</h6>
-        <p class="card-author">40 mins</p>
+        <h6 class="card-title m-0">Weekly Leader board</h6>
+        <ul class="list-group list-group-numbered">
+          <li class="list-group-item py-0 small">Bob</li>
+          <li class="list-group-item py-0 small">Alice</li>
+          <li class="list-group-item py-0 small">Ringo</li>
+        </ul>
+        <p class="font-weight-bold small">
+          REWARD: 3 month's membership of Building Blocks Fitness
+        </p>
       </div>
       <div class="short-img-container text-center">
         <img src="../../assets/images/Taco2.jpg" alt="" class="short-img" />
       </div>
     </div>
-
-    <!-- <div *ngIf="showTimer" class="counter h3 text-danger">{{ counter }}</div> -->
-
-    <br />
-  
-    <!-- <button class="btn btn-dark btn-lg blk-btn" (click)="handleMakeTacos()"> -->
-      <!-- Start -->
-    <!-- </button> -->
-
-    <br />
+    <button
+      class="btn btn-dark btn-lg blk-btn m-3"
+      (click)="getGymMembership()"
+      [disabled]="membershipClaimed"
+    >
+      {{ membershipClaimed ? 'Claimed!' : 'Claim' }}
+    </button>
+  </div>
   <br />
 
+  <div class="d-flex justify-content-around w-100 align-items-center mb-3">
+    <div class="coupon-card p-3">
+      <h4 class="coupon-title">Get 5% off protein burrito cooking class</h4>
+
+      <div class="text-center">
+        <img
+          class="long-img"
+          src="../../assets/images/team_view3.jpg"
+          alt="knife"
+        />
+      </div>
+    </div>
+    <div>
+      <button
+        [disabled]="!userRewarded"
+        class="btn btn-lg m-3 btn-dark blk-btn"
+        (click)="handleUseDiscount()"
+      >
+        Use
+      </button>
+    </div>
+  </div>
 </div>

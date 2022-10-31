@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { ThirdPageComponent } from './third-page/third-page.component';
 
 import { UserService } from '../app/service/user.service';
 
@@ -16,7 +15,6 @@ import { UserService } from '../app/service/user.service';
     AppComponent,
     MainPageComponent,
     UserPageComponent,
-    ThirdPageComponent
   ],
   imports: [
     BrowserModule,

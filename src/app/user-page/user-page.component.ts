@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RewardToken } from '../models/reward-token';
+import { RewardToken, Token } from '../models/reward-token';
 import { User } from '../models/user';
 import { UserService } from '../service/user.service';
 import { Balance } from '../models/balance';
-import { BalanceWrapper } from '../models/balance-dto';
 
 @Component({
   selector: 'app-user-page',
@@ -13,6 +11,8 @@ import { BalanceWrapper } from '../models/balance-dto';
   styleUrls: ['./user-page.component.css'],
 })
 export class UserPageComponent implements OnInit {
+
+  // create harcoded user
   balance: Balance = { denom: 'mitocell', amount: '0' };
   user: User = new User(
     'Bob',
@@ -20,8 +20,14 @@ export class UserPageComponent implements OnInit {
     this.balance,
   );
 
+  // show single token in view if valid
+  currentToken : Token | null = null
+  membershipClaimed = false
   showTimer = false;
   counter = 5;
+  score = 0;
+  userRewarded = false; // used to toggle button content
+  tokenList: Token[] = []; // list of tokens for user
 
   constructor(
     private userService: UserService,
@@ -29,99 +35,70 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  //   onKeyChangeScore(event: KeyboardEvent) {
-  //    this.score = +(event.target as HTMLInputElement).value
-  // }
-
-  // handleMainSubmit() {
-  //   const rewardToken: RewardToken = {
-  //     activityName: 'Weekly Score',
-  //     activityCreator: 'Little Chef',
-  //     publicAddress: this.accountAddress,
-  //     result: {
-  //       score: this.score,
-  //       message: 'Well done!',
-  //     },
-  //     reward: {
-  //       type: 'Points',
-  //       value: this.score < 3 ? 5 : 10,
-  //       targetPartner: 'Little Chef'
-  //     },
-  //   };
-
-  //   this.userService
-  //     .addToken(rewardToken)
-  //     .subscribe((account) => {
-  //       this.rewardTokens = account.rewardTokens;
-  //     });
-  // }
+  onKeyChangeScore(event: KeyboardEvent) {
+    this.score = +(event.target as HTMLInputElement).value;
+  }
 
   handleOffersClick() {
     this.router.navigate(['/user', 'offers']);
   }
 
-  // handleMakeTacos() {
-  //   const rewardToken: RewardToken = {
-  //     activityName: 'Challenge: Make Tacos',
-  //     activityCreator: 'Sukhdev',
-  //     publicAddress: this.accountAddress,
-  //     result: {
-  //       score: 10,
-  //       message: 'Well done!',
-  //     },
-  //     reward: {
-  //       type: 'Monthly Membership',
-  //       value: 1,
-  //       targetPartner: 'Jacks Restaurant',
-  //     },
-  //   };
+  // present user with 5% discount 5 seconds after button click
+  handleMakeTacos() {
+    this.showTimer = true;
+    let timer = setInterval(() => {
+      if (this.counter <= 0) {
+        clearInterval(timer);
+        this.showTimer = false;
+        this.userService.addDiscountToken().subscribe(() => {
+          console.log('setting reward claimed to true');
+          this.userRewarded = true;
+          this.refreshTokenList()
+        });
+      }
+      this.counter--;
+    }, 1000);
+  }
 
-  //   this.showTimer = true;
-  //   let timer = setInterval(() => {
-  //     if (this.counter <= 0) {
-  //       clearInterval(timer);
-  //       this.showTimer = false
-  //         this.userService
-  //           .addToken(rewardToken)
-  //           .subscribe((account) => {
-  //             this.rewardTokens = account.rewardTokens;
-  //           });
-  //     }
-  //     this.counter--
-  //   }, 1000);
+  // get token for gym membership
+  getGymMembership() {
+    this.userService.addMembershipToken().subscribe((data) => {
+      console.log({ data });
+    });
+    this.membershipClaimed = true
+    console.log('get gym membership clicked');
+  }
 
-  // }
-
-  // // handle learned tacos button click
-  // learnedTacos() {
-  //   const rewardToken: RewardToken = {
-  //     activityName: 'Learn to make tacos',
-  //     activityCreator: 'Sukhdev',
-  //     publicAddress: this.accountAddress,
-  //     result: {
-  //       score: 10,
-  //       message: 'Well done!',
-  //     },
-  //     reward: {
-  //       type: 'Discount',
-  //       value: 5,
-  //       targetPartner: 'Little Chef',
-  //     },
-  //   };
-  //   this.userService
-  //     .addToken(rewardToken)
-  //     .subscribe((account) => {
-  //       this.rewardTokens = account.rewardTokens;
-  //     });
-  // }
+  // handle discount for 5% off. Mark token status as invalid
+  handleUseDiscount() {
+    console.log('handle use discount');
+    this.userService.removeDiscountTokenStatus().subscribe((data) => {
+      console.log('discount token invalidated');
+      this.userRewarded = false;
+      this.refreshTokenList()
+    });
+  }
 
   ngOnInit() {
-    this.userService
-      .getBalance(this.user.account)
-      .subscribe((balanceDTO: BalanceWrapper) => {
-        const { balance } = balanceDTO;
-        this.user.balance.denom = balance.denom;
-        this.user.balance.amount = balance.amount;
-      });
+    this.refreshTokenList();
+  }
+
+  refreshTokenList() {
+    this.userService.getDiscountTokens().subscribe((data) => {
+      if (data.DiscountToken.length !== 0) {
+        this.currentToken = data.DiscountToken[0] // focus only on first token
+        console.log({ currentToken : this.currentToken })
+        this.userService.getDiscountTokenStatus().subscribe((statusData) => {
+          if (
+            statusData.DiscountTokenStatus &&
+            statusData.DiscountTokenStatus[0].status == 'Valid'
+          ) {
+            console.log('status valid');
+            this.tokenList = data.DiscountToken; // only display tokens that are valid
+            this.userRewarded = true;
+          } else this.tokenList = [] // if token is invalid, don't display it
+        });
+      }
+    });
   }
 }
