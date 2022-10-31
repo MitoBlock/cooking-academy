@@ -11,6 +11,7 @@ import { Balance } from '../models/balance';
   styleUrls: ['./user-page.component.css'],
 })
 export class UserPageComponent implements OnInit {
+
   balance: Balance = { denom: 'mitocell', amount: '0' };
   user: User = new User(
     'Bob',
@@ -18,6 +19,7 @@ export class UserPageComponent implements OnInit {
     this.balance,
   );
 
+  currentToken : Token | null = null
   membershipClaimed = false
   showTimer = false;
   counter = 5;
@@ -71,11 +73,12 @@ export class UserPageComponent implements OnInit {
         clearInterval(timer);
         this.showTimer = false;
         this.userService.addDiscountToken().subscribe(() => {
-          this.userService.getTokens().subscribe((tokens) => {
-            console.log({ tokens });
-          });
+          // this.userService.getTokens().subscribe((tokens) => {
+          //   console.log({ tokens });
+          // });
           console.log('setting reward claimed to true');
           this.userRewarded = true;
+          this.refreshTokenList()
         });
       }
       this.counter--;
@@ -107,22 +110,9 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.userService
-    //   .getBalance(this.user.account)
-    //   .subscribe((balanceDTO: BalanceWrapper) => {
-    //     const { balance } = balanceDTO;
-    //     this.user.balance.denom = balance.denom;
-    //     this.user.balance.amount = balance.amount;
-    //   });
 
-    // this.userService.getUserAddress().subscribe(addr => {
-    //   this.accountAddress = addr
-    // })
-
-    // this.userService.getTokenStatus(1).subscribe(data => {
-    //   console.log({ data })
-    // })
     this.refreshTokenList();
+
   }
 
   refreshTokenList() {
@@ -130,6 +120,8 @@ export class UserPageComponent implements OnInit {
       console.log('calling tokens service');
       if (data.DiscountToken.length !== 0) {
         console.log('got tokens response');
+        this.currentToken = data.DiscountToken[0]
+        console.log({ currentToken : this.currentToken })
         this.userService.getDiscountTokenStatus().subscribe((statusData) => {
           if (
             statusData.DiscountTokenStatus &&

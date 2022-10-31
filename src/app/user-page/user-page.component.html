@@ -31,12 +31,22 @@
 
   <h2 class="list-title space">Current Tokens</h2>
 
-  <ul class="list-group">
+  <!-- <ul class="list-group">
     <li class="list-group-item" *ngFor="let t of tokenList; index as i">
       <h3>{{ t.activityName }}</h3>
-      <p>{{ t.score }}</p>
     </li>
-  </ul>
+  </ul> -->
+  <div *ngIf="tokenList.length > 0 && currentToken != null" class="tokenBadge" >
+    <img class="tokenBadgeImage" src="../../assets/images/DiscountTokenLarge2.png" />
+    <div class="centered">
+      <b>User</b>: {{ user.account }} <br />
+      <b>Activity:</b>  {{ currentToken?.activityName}}  <br />
+      <b>Score:</b>  {{ currentToken?.score }}  <br />
+      <b>Discount Value:</b> {{ currentToken?.discountValue }} <br />
+      <b>Item Type:</b> {{ currentToken?.itemType }} <br />
+      <b>Expiry:</b> {{ currentToken?.expiryDate }} <br/>
+    </div>
+  </div>
 
   <br />
 
@@ -91,7 +101,7 @@
       (click)="getGymMembership()"
       [disabled]="membershipClaimed"
     >
-      {{ membershipClaimed ? "Claimed!" : "Claim" }}
+      {{ membershipClaimed ? 'Claimed!' : 'Claim' }}
     </button>
   </div>
   <br />
