@@ -25,26 +25,21 @@
       </tr>
     </tbody>
   </table>
-  <br />
-
-  <br />
 
   <h2 class="list-title space">Current Tokens</h2>
 
-  <!-- <ul class="list-group">
-    <li class="list-group-item" *ngFor="let t of tokenList; index as i">
-      <h3>{{ t.activityName }}</h3>
-    </li>
-  </ul> -->
-  <div *ngIf="tokenList.length > 0 && currentToken != null" class="tokenBadge" >
-    <img class="tokenBadgeImage" src="../../assets/images/DiscountTokenLarge2.png" />
+  <div *ngIf="tokenList.length > 0 && currentToken != null" class="tokenBadge">
+    <img
+      class="tokenBadgeImage"
+      src="../../assets/images/DiscountTokenLarge2.png"
+    />
     <div class="centered">
       <b>User</b>: {{ user.account }} <br />
-      <b>Activity:</b>  {{ currentToken?.activityName}}  <br />
-      <b>Score:</b>  {{ currentToken?.score }}  <br />
-      <b>Discount Value:</b> {{ currentToken?.discountValue }} <br />
-      <b>Item Type:</b> {{ currentToken?.itemType }} <br />
-      <b>Expiry:</b> {{ currentToken?.expiryDate }} <br/>
+      <b>Activity:</b> {{ currentToken.activityName }} <br />
+      <b>Score:</b> {{ currentToken.score }} <br />
+      <b>Discount Value:</b> {{ currentToken.discountValue }} <br />
+      <b>Item Type:</b> {{ currentToken.itemType }} <br />
+      <b>Expiry:</b> {{ currentToken.expiryDate }} <br />
     </div>
   </div>
 
@@ -106,9 +101,9 @@
   </div>
   <br />
 
-  <div class="d-flex justify-content-around w-100 align-items-center">
-    <div class="coupon-card">
-      <h4 class="coupon-title">Get 5% off Classes</h4>
+  <div class="d-flex justify-content-around w-100 align-items-center mb-3">
+    <div class="coupon-card p-3">
+      <h4 class="coupon-title">Get 5% off protein burrito cooking class</h4>
 
       <div class="text-center">
         <img

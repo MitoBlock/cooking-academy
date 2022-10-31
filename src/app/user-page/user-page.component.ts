@@ -12,6 +12,7 @@ import { Balance } from '../models/balance';
 })
 export class UserPageComponent implements OnInit {
 
+  // create harcoded user
   balance: Balance = { denom: 'mitocell', amount: '0' };
   user: User = new User(
     'Bob',
@@ -19,14 +20,14 @@ export class UserPageComponent implements OnInit {
     this.balance,
   );
 
+  // show single token in view if valid
   currentToken : Token | null = null
   membershipClaimed = false
   showTimer = false;
   counter = 5;
   score = 0;
-  // accountAddress = 'mitoxxx';
-  userRewarded = false;
-  tokenList: Token[] = [];
+  userRewarded = false; // used to toggle button content
+  tokenList: Token[] = []; // list of tokens for user
 
   constructor(
     private userService: UserService,
@@ -38,34 +39,11 @@ export class UserPageComponent implements OnInit {
     this.score = +(event.target as HTMLInputElement).value;
   }
 
-  /*
-  handleMainSubmit() {
-    const rewardToken: RewardToken = {
-      activityName: 'Weekly Score',
-      activityCreator: 'Little Chef',
-      publicAddress: this.accountAddress,
-      result: {
-        score: this.score,
-        message: 'Well done!',
-      },
-      reward: {
-        type: 'Points',
-        value: this.score < 3 ? 5 : 10,
-        targetPartner: 'Little Chef'
-      },
-    };
-
-    this.userService
-      .addToken(rewardToken)
-      .subscribe((account) => {
-        this.rewardTokens = account.rewardTokens;
-      });
-  }
- */
   handleOffersClick() {
     this.router.navigate(['/user', 'offers']);
   }
 
+  // present user with 5% discount 5 seconds after button click
   handleMakeTacos() {
     this.showTimer = true;
     let timer = setInterval(() => {
@@ -73,9 +51,6 @@ export class UserPageComponent implements OnInit {
         clearInterval(timer);
         this.showTimer = false;
         this.userService.addDiscountToken().subscribe(() => {
-          // this.userService.getTokens().subscribe((tokens) => {
-          //   console.log({ tokens });
-          // });
           console.log('setting reward claimed to true');
           this.userRewarded = true;
           this.refreshTokenList()
@@ -94,7 +69,7 @@ export class UserPageComponent implements OnInit {
     console.log('get gym membership clicked');
   }
 
-  // handle discount for 5% off
+  // handle discount for 5% off. Mark token status as invalid
   handleUseDiscount() {
     console.log('handle use discount');
     this.userService.removeDiscountTokenStatus().subscribe((data) => {
@@ -104,33 +79,24 @@ export class UserPageComponent implements OnInit {
     });
   }
 
-  // handle learned tacos button click
-  learnTacos() {
-    console.log('learn tacos clicked');
-  }
-
   ngOnInit() {
-
     this.refreshTokenList();
-
   }
 
   refreshTokenList() {
     this.userService.getDiscountTokens().subscribe((data) => {
-      console.log('calling tokens service');
       if (data.DiscountToken.length !== 0) {
-        console.log('got tokens response');
-        this.currentToken = data.DiscountToken[0]
+        this.currentToken = data.DiscountToken[0] // focus only on first token
         console.log({ currentToken : this.currentToken })
         this.userService.getDiscountTokenStatus().subscribe((statusData) => {
           if (
             statusData.DiscountTokenStatus &&
             statusData.DiscountTokenStatus[0].status == 'Valid'
           ) {
-            console.log('statis valid');
-            this.tokenList = data.DiscountToken;
+            console.log('status valid');
+            this.tokenList = data.DiscountToken; // only display tokens that are valid
             this.userRewarded = true;
-          } else this.tokenList = []
+          } else this.tokenList = [] // if token is invalid, don't display it
         });
       }
     });
