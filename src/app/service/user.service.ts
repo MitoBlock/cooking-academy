@@ -1,10 +1,18 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { EventEmitter, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { DiscountTokenStatusResp, MembershipTokenStatusResp, TokensResp } from "../models/reward-token";
-import { User } from "../models/user";
-import { api, mitoapi } from "./api";
-import { goapi } from "./api";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {
+  DeleteDiscountTokenStatusReq,
+  DeleteMembershipTokenStatusReq,
+  DiscountTokenReq,
+  DiscountTokenStatusResp,
+  MembershipTokenReq,
+  MembershipTokenStatusResp,
+  TokensResp,
+} from '../models/types';
+import { User } from '../models/user';
+import { api, mitoapi } from './api';
+import { goapi } from './api';
 
 export const HTTP_OPTIONS = {
   headers: new HttpHeaders({
@@ -19,46 +27,58 @@ export const HTTP_OPTIONS = {
 
 @Injectable()
 export class UserService {
-	
-	onUserAdded = new EventEmitter<User>();
+  onUserAdded = new EventEmitter<User>();
 
-	constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
+  // removeDiscountTokenStatus() : Observable<any> {
+  // 	// should be delete action, but that doesn't allow body
+  // 	return this.http.get<any>(`${goapi}deleteDiscountTokenStatus`);
+  // }
 
-	removeDiscountTokenStatus() : Observable<any> {
-		// should be delete action, but that doesn't allow body
-		return this.http.get<any>(`${goapi}deleteDiscountTokenStatus`);
+  removeDiscountTokenStatus(
+    body: DeleteDiscountTokenStatusReq,
+  ): Observable<any> {
+    return this.http.post<any>(`${goapi}deleteDiscountTokenStatus`, body);
   }
-	removeMembershipTokenStatus() : Observable<any> {
-		return this.http.get<any>(`${goapi}deleteMembershipTokenStatus`);
+
+  // only used in gym app
+  removeMembershipTokenStatus(
+    body: DeleteMembershipTokenStatusReq,
+  ): Observable<any> {
+    return this.http.post<any>(`${goapi}deleteMembershipTokenStatus`, body);
   }
 
-	addDiscountToken() : Observable<any> {
-		return this.http.get(`${goapi}discountToken`);
-	}
-	addMembershipToken() : Observable<any> {
-		return this.http.get(`${goapi}membershipToken`);
-	}
+  addDiscountToken(body: DiscountTokenReq): Observable<any> {
+    return this.http.post(`${goapi}discountToken`, body);
+  }
 
-	getDiscountTokens() : Observable<TokensResp> {
-		return this.http.get<TokensResp>(`${mitoapi}discount_tokens`);
-	}
+  addMembershipToken(body: MembershipTokenReq): Observable<any> {
+    return this.http.post(`${goapi}membershipToken`, body);
+  }
 
-	getMembershipTokens() : Observable<TokensResp> {
-		return this.http.get<TokensResp>(`${mitoapi}membership_tokens`);
-	}
+  getDiscountTokens(): Observable<TokensResp> {
+    return this.http.get<TokensResp>(`${mitoapi}discount_tokens`);
+  }
 
-	// hardcoding token id
-	getDiscountTokenStatus() : Observable<DiscountTokenStatusResp> {
-		return this.http.get<DiscountTokenStatusResp>(`${mitoapi}discount_token_status_q/0`);
-	}
+  getMembershipTokens(): Observable<TokensResp> {
+    return this.http.get<TokensResp>(`${mitoapi}membership_tokens`);
+  }
 
-	getMembershipTokenStatus() : Observable<MembershipTokenStatusResp> {
-		return this.http.get<MembershipTokenStatusResp>(`${mitoapi}membership_token_status_q/0`);
-	}
+  // hardcoding token id
+  getDiscountTokenStatus(): Observable<DiscountTokenStatusResp> {
+    return this.http.get<DiscountTokenStatusResp>(
+      `${mitoapi}discount_token_status_q/0`,
+    );
+  }
 
-	getTokens() : Observable<TokensResp> {
-		return this.http.get<TokensResp>(`${goapi}tokens`);
-	}
+  getMembershipTokenStatus(): Observable<MembershipTokenStatusResp> {
+    return this.http.get<MembershipTokenStatusResp>(
+      `${mitoapi}membership_token_status_q/0`,
+    );
+  }
 
+  getTokens(): Observable<TokensResp> {
+    return this.http.get<TokensResp>(`${goapi}tokens`);
+  }
 }

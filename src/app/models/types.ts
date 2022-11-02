@@ -1,18 +1,3 @@
-import { Result } from "./result"
-import { Reward } from "./reward"
-
-export interface RewardToken {
-	
-	id? : number
-	dateTime? : string
-	activityName : string
-	activityCreator : string
-	publicAddress : string
-	result : Result
-	reward : Reward
-
-}
-
 export interface Token {
 	id? : number
 	itemType? : string
@@ -32,7 +17,6 @@ export interface TokensResp {
 	DiscountToken : Token[]
 	pagination: { total : number }
 }
-
 
 export interface DiscountTokenStatusResp {
   DiscountToken: DiscountToken
@@ -100,3 +84,34 @@ export interface MembershipTokenStatus {
 }
 
 
+// --- DTO's for post requests ---
+
+export interface DeleteDiscountTokenStatusReq {
+  DiscountTokenStatusID: number,
+	TokenID: number,
+}
+
+export interface DeleteMembershipTokenStatusReq {
+  MembershipTokenStatusID: number,
+	TokenID: number,
+}
+
+export interface DiscountTokenReq {
+  Timestamp?: string
+  ActivityName: string
+  Score: number
+  Message: string
+  DiscountValue: number
+  EligibleCompanies: string
+  ItemType: string
+  ExpiryDate?: string
+}
+export interface MembershipTokenReq {
+  Timestamp?: string
+  ActivityName: string
+  Score: number
+  Message: string
+  MembershipDuration: string
+  EligibleCompanies: string
+  ExpiryDate?: string
+}
