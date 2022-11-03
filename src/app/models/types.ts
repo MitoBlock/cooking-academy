@@ -1,29 +1,15 @@
-import { Result } from "./result"
-import { Reward } from "./reward"
-
-export interface RewardToken {
-	
-	id? : number
-	dateTime? : string
-	activityName : string
-	activityCreator : string
-	publicAddress : string
-	result : Result
-	reward : Reward
-
-}
-
+// generic token type
 export interface Token {
 	id? : number
 	itemType? : string
 	dateTime? : string
 	activityName : string
-	activityCreator : string
+	activityCreator? : string
 	score: string
 	message: string
 	membershipDuration?: string
 	expiryDate: string
-	discountValue: string
+	discountValue?: string
 	timestamp?: string
 	creator?: string
 }
@@ -33,7 +19,6 @@ export interface TokensResp {
 	pagination: { total : number }
 }
 
-
 export interface DiscountTokenStatusResp {
   DiscountToken: DiscountToken
   DiscountTokenStatus?: DiscountTokenStatus[]
@@ -41,8 +26,6 @@ export interface DiscountTokenStatusResp {
 }
 
 export interface DiscountToken {
-  creator: string
-  id: string
   timestamp: string
   activityName: string
   score: string
@@ -51,16 +34,12 @@ export interface DiscountToken {
   eligibleCompanies: string
   itemType: string
   expiryDate: string
-  createdAt: string
 }
-
 export interface DiscountTokenStatus {
   id: string
-  creator: string
   timestamp: string
   status: string
   tokenID: string
-  createdAt: string
 }
 
 export interface Pagination {
@@ -78,8 +57,6 @@ export interface MembershipTokenStatusResp {
 }
 
 export interface MembershipToken {
-  creator: string
-  id: string
   timestamp: string
   activityName: string
   score: string
@@ -87,16 +64,45 @@ export interface MembershipToken {
   membershipDuration: string
   eligibleCompanies: string
   expiryDate: string
-  createdAt: string
 }
 
 export interface MembershipTokenStatus {
   id: string
-  creator: string
   timestamp: string
   status: string
   tokenID: string
-  createdAt: string
 }
 
 
+// --- DTO's for post requests ---
+
+export interface DeleteTokenStatusReq {
+  token_id: number;
+  id: number;
+  timestamp: string
+}
+
+export interface DeleteMembershipTokenStatusReq {
+  MembershipTokenStatusID: number,
+	TokenID: number,
+}
+
+export interface DiscountTokenReq {
+  timestamp: string
+  activity_name: string
+  score: string
+  message: string
+  discount_value: string
+  eligible_companies: string
+  item_type: string
+  expiry_date: string
+}
+export interface MembershipTokenReq {
+  timestamp: string
+  activity_name: string
+  score: string
+  message: string
+  membership_duration: string
+  eligible_companies: string
+  expiry_date: string
+}
