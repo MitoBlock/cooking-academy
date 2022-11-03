@@ -11,7 +11,7 @@ import {
   TokensResp,
 } from '../models/types';
 import { User } from '../models/user';
-import { api, mitoapi } from './api';
+import { mitoapi } from './api';
 import { goapi } from './api';
 
 export const HTTP_OPTIONS = {
