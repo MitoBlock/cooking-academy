@@ -31,22 +31,21 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // removeDiscountTokenStatus() : Observable<any> {
-  // 	// should be delete action, but that doesn't allow body
-  // 	return this.http.get<any>(`${goapi}deleteDiscountTokenStatus`);
-  // }
+	getUserAddress(): Observable<any> {
+		return this.http.get(`${goapi}addr`);
+	}
 
   removeDiscountTokenStatus(
     body: DeleteDiscountTokenStatusReq,
   ): Observable<any> {
-    return this.http.post<any>(`${goapi}deleteDiscountTokenStatus`, body);
+    return this.http.post<any>(`${goapi}discountTokenStatus`, body);
   }
 
   // only used in gym app
   removeMembershipTokenStatus(
     body: DeleteMembershipTokenStatusReq,
   ): Observable<any> {
-    return this.http.post<any>(`${goapi}deleteMembershipTokenStatus`, body);
+    return this.http.post<any>(`${goapi}membershipTokenStatus`, body);
   }
 
   addDiscountToken(body: DiscountTokenReq): Observable<any> {

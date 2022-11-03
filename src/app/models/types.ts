@@ -1,14 +1,15 @@
+// generic token type
 export interface Token {
 	id? : number
 	itemType? : string
 	dateTime? : string
 	activityName : string
-	activityCreator : string
+	activityCreator? : string
 	score: string
 	message: string
 	membershipDuration?: string
 	expiryDate: string
-	discountValue: string
+	discountValue?: string
 	timestamp?: string
 	creator?: string
 }
@@ -25,8 +26,6 @@ export interface DiscountTokenStatusResp {
 }
 
 export interface DiscountToken {
-  creator: string
-  id: string
   timestamp: string
   activityName: string
   score: string
@@ -35,16 +34,12 @@ export interface DiscountToken {
   eligibleCompanies: string
   itemType: string
   expiryDate: string
-  createdAt: string
 }
-
 export interface DiscountTokenStatus {
   id: string
-  creator: string
   timestamp: string
   status: string
   tokenID: string
-  createdAt: string
 }
 
 export interface Pagination {
@@ -62,8 +57,6 @@ export interface MembershipTokenStatusResp {
 }
 
 export interface MembershipToken {
-  creator: string
-  id: string
   timestamp: string
   activityName: string
   score: string
@@ -71,16 +64,13 @@ export interface MembershipToken {
   membershipDuration: string
   eligibleCompanies: string
   expiryDate: string
-  createdAt: string
 }
 
 export interface MembershipTokenStatus {
   id: string
-  creator: string
   timestamp: string
   status: string
   tokenID: string
-  createdAt: string
 }
 
 

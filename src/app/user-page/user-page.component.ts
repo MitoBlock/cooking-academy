@@ -107,6 +107,9 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit() {
     this.refreshTokenList();
+    this.userService.getUserAddress().subscribe((address) => {
+      this.user.address = address;
+    }) 
   }
 
   refreshTokenList() {
