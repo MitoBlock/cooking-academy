@@ -28,10 +28,6 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  // onKeyChangeScore(event: KeyboardEvent) {
-  //   this.score = +(event.target as HTMLInputElement).value;
-  // }
-
   handleOffersClick() {
     this.router.navigate(['/user', 'offers']);
   }
