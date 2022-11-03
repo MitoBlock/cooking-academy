@@ -105,9 +105,10 @@ export class UserPageComponent implements OnInit {
   handleUseDiscount() {
     console.log('handle use discount');
     this.userService
-      .removeDiscountTokenStatus({ token_id: 0, id: 0, timestamp: this.getCurrDate() })
+      .removeDiscountTokenStatus({ token_id: 0, id: 0, timestamp: this.getCurrDate(), status: "Invalid" })
       .subscribe((_) => {
         console.log('discount token invalidated');
+        alert("Discount applied");
         this.userRewarded = false;
         this.refreshTokenList();
       });

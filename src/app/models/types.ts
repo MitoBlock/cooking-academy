@@ -79,7 +79,8 @@ export interface MembershipTokenStatus {
 export interface DeleteTokenStatusReq {
   token_id: number;
   id: number;
-  timestamp: string
+  timestamp: string;
+  status: string;
 }
 
 export interface DeleteMembershipTokenStatusReq {
