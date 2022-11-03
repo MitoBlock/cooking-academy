@@ -11,14 +11,14 @@ import { UserService } from '../service/user.service';
 })
 export class UserPageComponent implements OnInit {
   // create harcoded user
-  user: User = new User('Bob', 'xxxx');
+  user: User = new User('Bob', 'loading...');
 
   // show single token in view if valid
   currentToken: Token | null = null;
   membershipClaimed = false;
   showTimer = false;
   counter = 5;
-  score = 0;
+  score = '0';
   userRewarded = false; // used to toggle button content
   tokenList: Token[] = []; // list of tokens for user
 
@@ -28,9 +28,9 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
   ) {}
 
-  onKeyChangeScore(event: KeyboardEvent) {
-    this.score = +(event.target as HTMLInputElement).value;
-  }
+  // onKeyChangeScore(event: KeyboardEvent) {
+  //   this.score = +(event.target as HTMLInputElement).value;
+  // }
 
   handleOffersClick() {
     this.router.navigate(['/user', 'offers']);
@@ -50,14 +50,14 @@ export class UserPageComponent implements OnInit {
         // send token details to server
         this.userService
           .addDiscountToken({
-            Timestamp: new Date().toISOString().slice(0, 15),
+            Timestamp: new Date().toString().slice(0, 15),
             ActivityName: 'Learn to make tacos',
-            Score: 10,
+            Score: '10',
             Message: 'Excelente',
-            DiscountValue: 5,
+            DiscountValue: '5',
             EligibleCompanies: 'Cooking Academy',
             ItemType: 'protein burrito cooking class',
-            ExpiryDate: expDate.toISOString().slice(0, 15),
+            ExpiryDate: expDate.toString().slice(0, 15),
           })
           .subscribe(() => {
             console.log('setting reward claimed to true');
@@ -74,17 +74,19 @@ export class UserPageComponent implements OnInit {
     // set expiry date to a month from now
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 1);
+    var currDateArr = new Date().toString().split(" ");
+    let currDate = `currDate[1] currDate[2] currDate[3]`
 
     // send token details to server
     this.userService
       .addMembershipToken({
-        Timestamp: new Date().toISOString().slice(0, 15),
+        Timestamp: new Date().toString().slice(0, 15),
         ActivityName: 'Weekly leaderboard',
-        Score: 10,
+        Score: '10',
         Message: 'Impresionante',
         MembershipDuration: '3',
         EligibleCompanies: 'Building Block Fitness', // membership applicable to this company
-        ExpiryDate: expDate.toISOString().slice(0, 15),
+        ExpiryDate: expDate.toString().slice(0, 15),
       })
       .subscribe((data) => {
         console.log({ data });

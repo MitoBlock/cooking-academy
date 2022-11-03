@@ -89,9 +89,9 @@ export interface DeleteMembershipTokenStatusReq {
 export interface DiscountTokenReq {
   Timestamp?: string
   ActivityName: string
-  Score: number
+  Score: string
   Message: string
-  DiscountValue: number
+  DiscountValue: string
   EligibleCompanies: string
   ItemType: string
   ExpiryDate?: string
@@ -99,7 +99,7 @@ export interface DiscountTokenReq {
 export interface MembershipTokenReq {
   Timestamp?: string
   ActivityName: string
-  Score: number
+  Score: string
   Message: string
   MembershipDuration: string
   EligibleCompanies: string
