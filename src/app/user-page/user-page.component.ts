@@ -10,7 +10,7 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./user-page.component.css'],
 })
 export class UserPageComponent implements OnInit {
-  // create harcoded user
+
   user: User = new User('Bob', 'loading...');
 
   // show single token in view if valid
@@ -38,9 +38,10 @@ export class UserPageComponent implements OnInit {
 
   // present user with 5% discount 5 seconds after button click
   handleMakeTacos() {
-    // set expiry date to a month from now
     var expDate = new Date();
     expDate.setMonth(expDate.getMonth() + 1);
+    let expDateStr = this.fixDate(expDate.toString()); 
+    let currDateStr = this.fixDate(new Date().toString());
 
     this.showTimer = true;
     let timer = setInterval(() => {
@@ -50,14 +51,14 @@ export class UserPageComponent implements OnInit {
         // send token details to server
         this.userService
           .addDiscountToken({
-            Timestamp: new Date().toString().slice(0, 15),
-            ActivityName: 'Learn to make tacos',
-            Score: '10',
-            Message: 'Excelente',
-            DiscountValue: '5',
-            EligibleCompanies: 'Cooking Academy',
-            ItemType: 'protein burrito cooking class',
-            ExpiryDate: expDate.toString().slice(0, 15),
+            timestamp: currDateStr,
+            activity_name: 'Learn to make tacos',
+            score: '10',
+            message: 'Excelente',
+            discount_value: '5',
+            eligible_companies: 'Cooking Academy',
+            item_type: 'protein burrito cooking class',
+            expiry_date: expDateStr
           })
           .subscribe(() => {
             console.log('setting reward claimed to true');
@@ -69,24 +70,33 @@ export class UserPageComponent implements OnInit {
     }, 1000);
   }
 
+  fixDate(date: string) {
+    var dateArr = date.split(" ");
+    let formattedDate = `${dateArr[1]} ${dateArr[2]} ${dateArr[3]}`
+    return formattedDate
+  }
+  getCurrDate() {
+    let currDate = new Date();
+    return this.fixDate(currDate.toString());
+  }
+  getExpDate() {
+    let expDate = new Date();
+    expDate.setMonth(expDate.getMonth() + 1);
+    return this.fixDate(expDate.toString()); 
+  }
+
   // create and get token for gym membership
   getGymMembership() {
-    // set expiry date to a month from now
-    var expDate = new Date();
-    expDate.setMonth(expDate.getMonth() + 1);
-    var currDateArr = new Date().toString().split(" ");
-    let currDate = `currDate[1] currDate[2] currDate[3]`
-
     // send token details to server
     this.userService
       .addMembershipToken({
-        Timestamp: new Date().toString().slice(0, 15),
-        ActivityName: 'Weekly leaderboard',
-        Score: '10',
-        Message: 'Impresionante',
-        MembershipDuration: '3',
-        EligibleCompanies: 'Building Block Fitness', // membership applicable to this company
-        ExpiryDate: expDate.toString().slice(0, 15),
+        timestamp: this.getCurrDate(),
+        activity_name: 'Weekly leaderboard',
+        score: '10',
+        message: 'Impresionante',
+        membership_duration: '3',
+        eligible_companies: 'Building Block Fitness',
+        expiry_date: this.getExpDate()
       })
       .subscribe((data) => {
         console.log({ data });
@@ -99,7 +109,7 @@ export class UserPageComponent implements OnInit {
   handleUseDiscount() {
     console.log('handle use discount');
     this.userService
-      .removeDiscountTokenStatus({ DiscountTokenStatusID: 0, TokenID: 0 })
+      .removeDiscountTokenStatus({ token_id: 0, id: 0, timestamp: this.getCurrDate() })
       .subscribe((_) => {
         console.log('discount token invalidated');
         this.userRewarded = false;

@@ -76,9 +76,10 @@ export interface MembershipTokenStatus {
 
 // --- DTO's for post requests ---
 
-export interface DeleteDiscountTokenStatusReq {
-  DiscountTokenStatusID: number,
-	TokenID: number,
+export interface DeleteTokenStatusReq {
+  token_id: number;
+  id: number;
+  timestamp: string
 }
 
 export interface DeleteMembershipTokenStatusReq {
@@ -87,21 +88,21 @@ export interface DeleteMembershipTokenStatusReq {
 }
 
 export interface DiscountTokenReq {
-  Timestamp?: string
-  ActivityName: string
-  Score: string
-  Message: string
-  DiscountValue: string
-  EligibleCompanies: string
-  ItemType: string
-  ExpiryDate?: string
+  timestamp: string
+  activity_name: string
+  score: string
+  message: string
+  discount_value: string
+  eligible_companies: string
+  item_type: string
+  expiry_date: string
 }
 export interface MembershipTokenReq {
-  Timestamp?: string
-  ActivityName: string
-  Score: string
-  Message: string
-  MembershipDuration: string
-  EligibleCompanies: string
-  ExpiryDate?: string
+  timestamp: string
+  activity_name: string
+  score: string
+  message: string
+  membership_duration: string
+  eligible_companies: string
+  expiry_date: string
 }

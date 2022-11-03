@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  DeleteDiscountTokenStatusReq,
-  DeleteMembershipTokenStatusReq,
+  DeleteTokenStatusReq,
   DiscountTokenReq,
   DiscountTokenStatusResp,
   MembershipTokenReq,
@@ -36,14 +35,14 @@ export class UserService {
 	}
 
   removeDiscountTokenStatus(
-    body: DeleteDiscountTokenStatusReq,
+    body: DeleteTokenStatusReq,
   ): Observable<any> {
     return this.http.post<any>(`${goapi}discountTokenStatus`, body);
   }
 
   // only used in gym app
   removeMembershipTokenStatus(
-    body: DeleteMembershipTokenStatusReq,
+    body: DeleteTokenStatusReq,
   ): Observable<any> {
     return this.http.post<any>(`${goapi}membershipTokenStatus`, body);
   }
