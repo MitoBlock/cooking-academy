@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Token } from '../models/types';
 import { User } from '../models/user';
 import { UserService } from '../service/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-page',
@@ -108,7 +109,7 @@ export class UserPageComponent implements OnInit {
       .removeDiscountTokenStatus({ token_id: 0, id: 0, timestamp: this.getCurrDate(), status: "Invalid" })
       .subscribe((_) => {
         console.log('discount token invalidated');
-        alert("Discount applied");
+        Swal.fire("Discount applied!","5% off the cooking class","success");
         this.userRewarded = false;
         this.refreshTokenList();
       });
