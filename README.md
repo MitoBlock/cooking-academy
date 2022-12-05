@@ -25,3 +25,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 
+![organization-reward](https://user-images.githubusercontent.com/48499132/205682710-0ee6cae4-410a-4c82-8c74-f0bc68c762d2.gif)
